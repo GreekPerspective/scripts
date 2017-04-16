@@ -1,7 +1,7 @@
 # scripts
 Scripts to process the different data files
 
-**TrieConvert.py**:  used by convert_pp.py and convert_pp4.py and convert_pp_pass2.py
+**TrieConvert.py**:  used by `convert_pp.py`, `convert_pp4.py` and `convert_pp_pass2.py`
 
 **convert_pp.py**: converts from betacode to UTF-8, post-proc sigmas. Creates BRAT files.
 
@@ -10,14 +10,14 @@ Example:
 python3 convert_pp.py -f plat.laws_gk.xml
 ```
 
-**convert_pp4.py**: converts from betacode to UTF-8, post-proc sigmas. Creates BRAT files. Does speaker-IDs ublike convert_pp.py
+**convert_pp4.py**: converts from betacode to UTF-8, post-proc sigmas. Creates BRAT files. Does speaker-IDs unlike convert_pp.py
 
 ```bash
 Example:
 python3 convert_pp4.py -f plat.laws_gk.xml
 ```
 
-**convert_pp_pass2.py**: Takes output from convert_pp4.py and makes the final BRAT version. Splits also in chapters/books.
+**convert_pp_pass2.py**: Takes output from `convert_pp4.py` and makes the final BRAT version. Splits also in chapters/books.
 
 ```bash
 Example:
@@ -39,7 +39,7 @@ python3 bratstats.py -f "thuc.hist_gk.brat.book6*.txt"
 
 **conllXtostandoff.py**:  Script to convert a CoNLL X (2006) tabbed dependency tree format file into BioNLP ST-flavored standoff and a reconstruction of the original text.
 
-**convert_perseus_csv.py**: converts /Users/pberck/Downloads/hib_parses_uc.csv to word-lemma-tag. Used to make perseus-wlt.txt
+**convert_perseus_csv.py**: converts `/Users/pberck/Downloads/hib_parses_uc.csv` to word-lemma-tag. Used to make `perseus-wlt.txt`
 
 ```bash
 Example:
@@ -56,7 +56,7 @@ hdt.xml moet in dezelfde directory liggen als convert_tags.py.
 Leest de mapping uit tagsmap.txt in dezelfde directory
 ```
  
-**merge_proiel_perseus.py**:  Merget de twee output files van rewrite_proiel en rewrite_perseus.
+**merge_proiel_perseus.py**:  Merget de twee output files van `rewrite_proiel.py` en `rewrite_perseus.py`.
 
 ```bash
 Example:
@@ -75,7 +75,7 @@ python3 rewrite_perseus.py -f hib_sqldump_word_lemma_tag.utf8 > hib_sql.out.txt
 python3 rewrite_perseus.py -f 04_perseus/d638f82gs4.txt.utf8b > 04_perseus/d638f82gs4.txt.utf8b.rwrt
 ```
 
-**rewrite_proiel_v3.py**: Rewrites tags in greek_Haudag.pcases.lemma.lex, uses info from perseus-wlt.lex.
+**rewrite_proiel_v3.py**: Rewrites tags in `greek_Haudag.pcases.lemma.lex`, uses info from `perseus-wlt.lex`.
 
 ```bash
 Example:
