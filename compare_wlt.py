@@ -10,6 +10,7 @@ from unicodedata import normalize
 # 2016-12-15 added -t option.
 # 2016-12-19 Fixes and improvements
 # 2017-01-06 Lowercasing, normalisation, stripping of bits, error file
+# 2017-04-21 accent mangling
 
 # --------
 # Compares two wlt files, or one stats and one wlt file.
@@ -28,15 +29,18 @@ statsmode = False # if -wlt is really -stats, count strategies. Gold is assumed 
 taglen = 255 #compare full tags, otherwise length specified with -t option
 lc = False
 norm = False # Unicode normalisation
+mangle = False
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "f:g:lnst:", [])
+    opts, args = getopt.getopt(sys.argv[1:], "af:g:lnst:", [])
 except getopt.GetoptError as err:
     print(str(err))
     sys.exit(1)
 for o, a in opts:
     if o in ("-f"):
         testfilename = a # wlt output
+    elif o in ("-a"): # mangle accents
+         mangle = True
     elif o in ("-g"): # gold set, always wlt format
          goldfilename = a
     elif o in ("-l"): # Lowercase tokens before comparing
@@ -58,6 +62,21 @@ def remove_hash(lemma):
         lemma = lemma[0:hidx]
     return lemma
 
+accents = [ ('ὲ', 'έ'),
+            ('ὰ', 'ά'), 
+            ('ὸ', 'ό'),
+            ('ὺ', 'ύ'),
+            ('ὶ', 'ί'),
+            ('ὴ', 'ή'),
+            ('ἢ', 'ἤ')
+        ]
+def sub_accents(token):
+    # inefficient
+    for a,r in accents:
+        if a in token:
+            token = token.replace(a, r)
+    return token
+    
 stats  = Counter()
 errors = Counter()
 
@@ -69,6 +88,10 @@ with open(testfilename, 'r') as f:
             gl = g.readline()
             if len(gl) > 0 and gl[0] == "#":
                 continue
+            # all?
+            if mangle:
+                fl = sub_accents(fl)
+                gl = sub_accents(gl)
             fbits = fl.split('\t')
             fbits = [foo.strip() for foo in fbits]
             gbits = gl.split('\t')
